@@ -13,4 +13,4 @@ mongoose.connect('mongodb://127.0.0.1:27017/billmanager', {
         console.log(error)
     })
 
-module.exports = mongoose
+module.exports = mongoose;
