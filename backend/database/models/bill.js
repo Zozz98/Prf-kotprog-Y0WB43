@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
 const BillSchema = new mongoose.Schema({
+    /*billId: {
+        type: String,
+        required: true,
+        unique: true
+    },*/
     name: {
         type: String,
         required: true
