@@ -10,12 +10,58 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('./database/mongoose')
 const passport = require('passport')
-const expressSession = require('express-session')
+const localStrategy = require('passport-local').Strategy;
+const expressSession = require('express-session');
+
+require('./database/models/user');
+const userModel = mongoose.model('user');
 
 const app = express();
 
-app.use(express.json());
 app.use(cors());
+
+passport.use('local', new localStrategy(function(username, password, done) {
+    userModel.findOne({username: username}, function(error, user) {
+        if(error) {
+            return done('Error during user query', null);
+        }
+
+        if(!user) {
+            return done('No such username', null);
+        }
+
+        user.comparePasswords(password, function(error, isMatch) {
+            if(error) {
+                return done(error,false);
+            }
+            return done(null, isMatch);
+        })
+    })
+}))
+
+passport.serializeUser(function(user, done) {
+    if(!user) {
+        return('No login user specified', null);
+    }
+    return done(null, user);
+})
+
+passport.deserializeUser(function(user, done) {
+    if(!user) {
+        return done('No user who can be exited', null);
+    }
+    return done(null,user);
+})
+
+app.use(expressSession({
+    secret: 'ProgramrendszerekFejleszteseKotelezoProgram2023Y0WB43',
+    resave: true}));
+
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
