@@ -27,7 +27,9 @@ app.use(cors({
         } else {
             callback(new Error('CORS Error'))
         }
-    }
+    },
+    credentials: true, 
+    methods: "GET,PUT,POST,DELETE,OPTIONS"
 }));
 
 passport.use('local', new localStrategy(function(username, password, done) {
