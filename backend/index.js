@@ -14,7 +14,7 @@ const localStrategy = require('passport-local').Strategy;
 const expressSession = require('express-session');
 
 require('./database/models/user');
-const userModel = mongoose.model('user');
+const userModel = mongoose.model('User');
 
 const app = express();
 
@@ -34,7 +34,11 @@ passport.use('local', new localStrategy(function(username, password, done) {
             if(error) {
                 return done(error,false);
             }
-            return done(null, isMatch);
+
+            if(!isMatch) {
+                return done('Wrong password', false)
+            }
+            return done(null, user);
         })
     })
 }))
