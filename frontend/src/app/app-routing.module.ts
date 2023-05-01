@@ -7,11 +7,12 @@ import { LoginComponent } from './component/login/login.component';
 import { RegistrationComponent } from './component/registration/registration.component';
 
 const routes: Routes = [
-  {path:'',component:HomeComponent},
-  {path:'login',component:LoginComponent},
-  {path:'registration',component:RegistrationComponent},
-  {path:'listUsers', component:ListUsersComponent},
-  {path:'listBills',component:ListBillsComponent}
+  {path:'',component: HomeComponent},
+  {path:'login',component: LoginComponent},
+  {path:'registration',component: RegistrationComponent},
+  {path:'listUsers', component: ListUsersComponent},
+  {path:'listBills',component: ListBillsComponent},
+  {path:'**', component: LoginComponent}
 ];
 
 @NgModule({
