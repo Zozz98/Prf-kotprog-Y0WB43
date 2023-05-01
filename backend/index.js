@@ -18,7 +18,17 @@ const userModel = mongoose.model('User');
 
 const app = express();
 
-app.use(cors());
+const whiteList = ['http://localhost:4200']
+
+app.use(cors({
+    origin: function(origin, callback) {
+        if(whiteList.indexOf(origin) >= 0) {
+            callback(null, true);
+        } else {
+            callback(new Error('CORS Error'))
+        }
+    }
+}));
 
 passport.use('local', new localStrategy(function(username, password, done) {
     userModel.findOne({username: username}, function(error, user) {

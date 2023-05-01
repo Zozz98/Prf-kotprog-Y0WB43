@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
 import {FormBuilder, Validators} from '@angular/forms';
+import { RegistrationService } from 'src/app/service/registration.service';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-registration',
@@ -9,7 +10,22 @@ import {FormBuilder, Validators} from '@angular/forms';
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor( ) { }
+  username: string;
+  password: string;
+
+  constructor(private registrationService: RegistrationService, private formBuilder: FormBuilder, private router: Router ) {
+    this.username = '';
+    this.password = '';
+   }
+
+   registrationFormGroup = this.formBuilder.group({
+    username: ['',[Validators.required, Validators.minLength(4)]],
+    password: ['',[Validators.required, Validators.minLength(8)]]
+   })
+
+   signUp() {
+    
+   }
 
   ngOnInit(): void {
   }
