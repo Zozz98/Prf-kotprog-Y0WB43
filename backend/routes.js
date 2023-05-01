@@ -16,7 +16,6 @@ router.route('/listUsers').get((req,res,next) => {
 router.route('/createUser').post((req,res,next) => {
     new User({
         'username':req.body.username,
-        'email':req.body.email,
         'password':req.body.password
     })
     .save()
@@ -50,7 +49,6 @@ router.route('/listBills').get((req,res,next) => {
 //Create Bills[x]
 router.route('/createBill').post((req,res,next) => {
     new Bill({
-        /*'billId':req.body.billId,*/
         'name':req.body.name,
         'comment':req.body.comment,
         'price':req.body.price
@@ -77,10 +75,14 @@ router.route('/deleteBill/:id').delete((req,res,next) => {
 })
 
 //Login
-
+router.route('login').post((req,res,next) => {
+//TODO
+})
 
 //Register
-
+router.route('registration').post((req,res,next) => {
+//TODO
+})
 
 //Logout
 
