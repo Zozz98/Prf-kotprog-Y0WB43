@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const passport = require('passport');
 
 const User = require("./database/models/user");
 const Bill = require('./database/models/bill');
@@ -13,6 +14,7 @@ router.route('/listUsers').get((req,res,next) => {
 })
 
 //Create Users[x]
+/*
 router.route('/createUser').post((req,res,next) => {
     new User({
         'username':req.body.username,
@@ -22,6 +24,7 @@ router.route('/createUser').post((req,res,next) => {
     .then((createUser) => res.send(createUser))
     .catch((error) => console.log('Error in createUser ',error))
 })
+*/
 
 //Update Users[x]
 router.route('/updateUser/:id').put((req,res,next) => {
@@ -74,16 +77,44 @@ router.route('/deleteBill/:id').delete((req,res,next) => {
         .catch((error) => console.log('Error in deleteBill ',error))
 })
 
-//Login
-router.route('login').post((req,res,next) => {
-//TODO
+//Login[x]
+router.route('/login').post((req,res,next) => {
+    if(req.body.username, req.body.password) {
+        passport.authenticate('local', function(error, user) {
+            if(error) {
+                return res.status(500).send(error);
+            }
+            req.logIn(user, function(error) {
+                if(error) {
+                    return res.status(500).send(error);
+                }
+                res.status(200).send('Login was successful')
+            })
+        })(req, res);
+    } else {
+        return res.status(403).send('Bad request, you need username & password')
+    }
 })
 
-//Register
-router.route('registration').post((req,res,next) => {
-//TODO
+//Register[x]
+router.route('/registration').post((req,res,next) => {
+    new User({
+        'username':req.body.username,
+        'password':req.body.password
+    })
+    .save()
+    .then((createUser) => res.send(createUser))
+    .catch((error) => console.log('Error in registration ',error))
 })
 
-//Logout
-
+//Logout[x]
+router.route('/logout').post((req, res, next) => {
+    if(req.isAuthenticated()) {
+        req.logOut();
+        res.status(200).send('Logout was successful')
+    }else {
+        return res.status(403).send('No signed user, so you cant logout')
+    }
+    
+})
 module.exports = router;
