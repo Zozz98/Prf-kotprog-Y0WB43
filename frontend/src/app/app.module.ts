@@ -14,6 +14,8 @@ import { ListBillsComponent } from './component/list-bills/list-bills.component'
 import { HttpClientModule } from '@angular/common/http';
 import { LoginService } from './service/login.service';
 import { RegistrationService } from './service/registration.service';
+import { ErrorComponent } from './component/error/error.component';
+import { CreateBillComponent } from './component/create-bill/create-bill.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { RegistrationService } from './service/registration.service';
     RegistrationComponent,
    
     ListUsersComponent,
-    ListBillsComponent
+    ListBillsComponent,
+    ErrorComponent,
+    CreateBillComponent
   ],
   imports: [
     BrowserModule,

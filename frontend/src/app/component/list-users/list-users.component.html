@@ -3,7 +3,7 @@
 <div class="table table-striped m-1">
     <thead>
         <tr>
-            <th></th>
+            <th *ngFor="let header of tableHeaders">{{header}}</th>
         </tr>
     </thead>
 

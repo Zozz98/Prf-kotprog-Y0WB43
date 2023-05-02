@@ -6,6 +6,7 @@ import { ListBillsComponent } from './component/list-bills/list-bills.component'
 import { LoginComponent } from './component/login/login.component';
 import { RegistrationComponent } from './component/registration/registration.component';
 import { AuthGuard } from './guard/auth.guard';
+import { ErrorComponent } from './component/error/error.component';
 
 const routes: Routes = [
   {path:'',component: HomeComponent, canActivate:[AuthGuard]},
@@ -13,7 +14,7 @@ const routes: Routes = [
   {path:'registration',component: RegistrationComponent},
   {path:'listUsers', component: ListUsersComponent, canActivate:[AuthGuard]},
   {path:'listBills',component: ListBillsComponent, canActivate:[AuthGuard]},
-  {path:'**', component: LoginComponent}
+  {path:'**', component: ErrorComponent}
 ];
 
 @NgModule({

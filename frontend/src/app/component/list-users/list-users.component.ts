@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListUsersComponent implements OnInit {
 
+  tableHeaders = ['#','Username','Password']
+
   constructor() { }
 
   ngOnInit(): void {

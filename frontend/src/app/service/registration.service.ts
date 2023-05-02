@@ -11,6 +11,6 @@ export class RegistrationService {
   constructor(private http: HttpClient) { }
 
   signup() {
-    //return this.http.post()
+    //return this.http.post(this.serverUrl+'/registration')
   }
 }
