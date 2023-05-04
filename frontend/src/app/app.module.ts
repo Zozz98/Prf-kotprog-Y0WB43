@@ -17,6 +17,7 @@ import { RegistrationService } from './service/registration.service';
 import { ErrorComponent } from './component/error/error.component';
 import { CreateBillComponent } from './component/create-bill/create-bill.component';
 import { BillService } from './service/bill.service';
+import { UserService } from './service/user.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { BillService } from './service/bill.service';
   ],
   providers: [LoginService,
     RegistrationService,
-    BillService
+    BillService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

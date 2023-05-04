@@ -35,5 +35,13 @@ export class BillService {
         })
     }
 
+    updatebill(id:string) {
+
+    }
+
+    deletebill(id:string) {
+        
+    }
+
     
 }

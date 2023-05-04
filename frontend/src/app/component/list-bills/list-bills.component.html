@@ -13,6 +13,8 @@
             <td>{{bill.name}}</td>
             <td>{{bill.comment}}</td>
             <td>{{bill.price}}</td>
+            <a routerLink="/updateBill/{{bill._id}}" class="btn btn-outline">Edit</a>
+            <a class="btn btn-outline-danger">Delete</a>
         </tr>
     </tbody>
 </div>

@@ -3,11 +3,17 @@
 <div class="table table-striped m-1">
     <thead>
         <tr>
-            <th *ngFor="let header of tableHeaders">{{header}}</th>
+            <th *ngFor="let header of tableHeaders" class="text-center">{{header}}</th>
         </tr>
     </thead>
 
     <tbody>
-        
+        <tr *ngFor="let user of users">
+            <td>{{user._id}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.password}}</td>
+            <td><a routerLink="/updateUser/{{user._id}}" class="btn btn-outline-secondary">Edit</a></td>
+            <td><a routerLink="/deleteUser/{{user._id}}" class="btn btn-outline-danger">Delete</a></td>
+        </tr>
     </tbody>
 </div>

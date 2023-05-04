@@ -19,16 +19,6 @@ export class ListBillsComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        /*
-    this.billService.listbills().subscribe({
-      next: (message) => {
-        console.log('list bills component ngOnInit: ',message)
-      },
-      error: (error) => {
-        console.log('list bills component ngOnInit error: ',error)
-      }
-    })
-    */
         this.billService.listbills().subscribe({
             next: (data) => {
                 (this.bills = data),
