@@ -8,12 +8,13 @@
     </thead>
 
     <tbody>
-        <tr>
-            <td>
-
-            </td>
+        <tr *ngFor="let bill of bills">
+            <td>{{bill._id}}</td>
+            <td>{{bill.name}}</td>
+            <td>{{bill.comment}}</td>
+            <td>{{bill.price}}</td>
         </tr>
     </tbody>
 </div>
-<button class="btn btn-outline-primary">Create bill</button>
+<button routerLink="/createBill" class="btn btn-outline-primary">Create bill</button>
 

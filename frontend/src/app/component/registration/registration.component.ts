@@ -42,14 +42,14 @@ export class RegistrationComponent implements OnInit {
 
             
             this.registrationService
-                .signup(this.username, this.password)
+                .signup(this.registrationFormGroup.controls.username.value, this.registrationFormGroup.controls.password.value)
                 .subscribe({
                     next: (message) => {
-                        console.log('registration component signup: ', message);
+                        console.log('registration component signUp: ', message);
                         this.router.navigate(['/login']);
                     },
                     error: (error) => {
-                        console.log('registration component signup error: ', error);
+                        console.log('registration component signUp error: ', error);
                     },
                 });
         }

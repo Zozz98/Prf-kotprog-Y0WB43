@@ -17,34 +17,23 @@ require('./database/models/user');
 const userModel = mongoose.model('User');
 
 const app = express();
+mongoose.set('strictQuery', true);
 
-const whiteList = ['http://localhost:4200','http://localhost:3000']
-
-/* EZZEL CORS ERROR-T DOB !
-app.use(cors({
-    origin: function(origin, callback) {
-        if(whiteList.indexOf(origin) !== -1) {
-            callback(null, true);
-        } else {
-            callback(new Error('CORS Error: '));
-        }
-    },
-    credentials: true, 
-    methods: ["GET,PUT,POST,DELETE,OPTIONS"]
-}));
-*/
-
-//EZZEL NEM DOB CORS ERROR-T
 app.use((req,res,next) => {
-    res.header("Access-Control-Allow-Origin","*");
-    res.header("Access-Control-Allow-Methods", "GET,POST,HEAD,OPTIONS,PUT,PATCH,DELETE");
-    res.header("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Origin','http://localhost:4200');
+    res.header('Access-Control-Allow-Credentials','true');
+
+    if(req.method === 'OPTIONS') {
+        res.header("Access-Control-Allow-Methods", "GET,POST,HEAD,OPTIONS,PUT,PATCH,DELETE");
+        res.header("Access-Control-Allow-Headers","Content-Type, Authorization, Content-Length, X-Requested-With");
+        res.header('Access-Controll-Max-Age','3600')
+    }
     next();
 })
 
 
 passport.use('local', new localStrategy(function(username, password, done) {
-    userModel.findOne({username: username}, function(error, user) {
+    userModel.findOne({username}, function(error, user) {
         if(error) {
             return done('Error during user query', null);
         }
@@ -85,12 +74,11 @@ app.use(expressSession({
     resave: true
 }));
 
-mongoose.set('strictQuery', true);
-
-
-
 app.use(passport.initialize());
 app.use(passport.session());
+
+
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -100,13 +88,6 @@ app.use(bodyParser.json());
 
 app.use('/', require('./routes'));
 
-/*
-app.get('/users', (req, res, next) => {
-    User.find({})
-        .then(users => res.send(users))
-        .catch((error) => console.log(error))
-})
-*/
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

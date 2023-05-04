@@ -14,19 +14,6 @@ router.route('/listUsers').get((req,res,next) => {
         .catch((error) => console.log('Error in listUsers ',error))
 })
 
-//Create Users[x]
-/*
-router.route('/createUser').post((req,res,next) => {
-    new User({
-        'username':req.body.username,
-        'password':req.body.password
-    })
-    .save()
-    .then((createUser) => res.send(createUser))
-    .catch((error) => console.log('Error in createUser ',error))
-})
-*/
-
 //Update Users[x]
 router.route('/updateUser/:id').put((req,res,next) => {
     User.findOneAndUpdate({_id: req.params.id}, {
@@ -80,7 +67,8 @@ router.route('/deleteBill/:id').delete((req,res,next) => {
 
 //Login[x]
 router.route('/login').post((req,res,next) => {
-    if(req.body.username, req.body.password) {
+    if(req.body.username && req.body.password) {
+        console.log("backend log:", req.body)
         passport.authenticate('local', function(error, user) {
             if(error) {
                 return res.status(500).send(error);
@@ -100,12 +88,10 @@ router.route('/login').post((req,res,next) => {
 //Register[x]
 router.route('/registration').post((req,res,next) => {
     new User({
-        /*
+        
         'username': req.body.username,
         'password': req.body.password
-        */
-        username:req.body.username,
-        password:req.body.password
+       
     })
     .save()
     .then((createUser) => res.send(createUser))
@@ -115,7 +101,7 @@ router.route('/registration').post((req,res,next) => {
 //Logout[x]
 router.route('/logout').post((req, res, next) => {
     if(req.isAuthenticated()) {
-        req.logOut();
+        req.logout();
         res.status(200).send('Logout was successful')
     }else {
         return res.status(403).send('No signed user, so you cant logout')

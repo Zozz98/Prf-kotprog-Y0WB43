@@ -7,18 +7,32 @@ import { LoginComponent } from './component/login/login.component';
 import { RegistrationComponent } from './component/registration/registration.component';
 import { AuthGuard } from './guard/auth.guard';
 import { ErrorComponent } from './component/error/error.component';
+import { CreateBillComponent } from './component/create-bill/create-bill.component';
 
 const routes: Routes = [
-  {path:'',component: HomeComponent, canActivate:[AuthGuard]},
-  {path:'login',component: LoginComponent},
-  {path:'registration',component: RegistrationComponent},
-  {path:'listUsers', component: ListUsersComponent, canActivate:[AuthGuard]},
-  {path:'listBills',component: ListBillsComponent, canActivate:[AuthGuard]},
-  {path:'**', component: ErrorComponent}
+    { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: 'login', component: LoginComponent },
+    { path: 'registration', component: RegistrationComponent },
+    {
+        path: 'listUsers',
+        component: ListUsersComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'listBills',
+        component: ListBillsComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'createBill',
+        component: CreateBillComponent,
+        canActivate: [AuthGuard],
+    },
+    { path: '**', component: ErrorComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -16,6 +16,7 @@ import { LoginService } from './service/login.service';
 import { RegistrationService } from './service/registration.service';
 import { ErrorComponent } from './component/error/error.component';
 import { CreateBillComponent } from './component/create-bill/create-bill.component';
+import { BillService } from './service/bill.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { CreateBillComponent } from './component/create-bill/create-bill.compone
     ReactiveFormsModule
   ],
   providers: [LoginService,
-    RegistrationService
+    RegistrationService,
+    BillService
   ],
   bootstrap: [AppComponent]
 })
