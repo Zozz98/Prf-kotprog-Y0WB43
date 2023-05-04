@@ -12,7 +12,6 @@ const BillSchema = new mongoose.Schema({
     },
     comment: {
         type: String,
-        maxLength: 100,
         required: true
     },
     price: {

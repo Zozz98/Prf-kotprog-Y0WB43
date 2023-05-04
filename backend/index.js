@@ -18,19 +18,30 @@ const userModel = mongoose.model('User');
 
 const app = express();
 
-const whiteList = ['http://localhost:4200']
+const whiteList = ['http://localhost:4200','http://localhost:3000']
 
+/* EZZEL CORS ERROR-T DOB !
 app.use(cors({
     origin: function(origin, callback) {
-        if(whiteList.indexOf(origin) >= 0) {
+        if(whiteList.indexOf(origin) !== -1) {
             callback(null, true);
         } else {
-            callback(new Error('CORS Error'))
+            callback(new Error('CORS Error: '));
         }
     },
     credentials: true, 
-    methods: "GET,PUT,POST,DELETE,OPTIONS"
+    methods: ["GET,PUT,POST,DELETE,OPTIONS"]
 }));
+*/
+
+//EZZEL NEM DOB CORS ERROR-T
+app.use((req,res,next) => {
+    res.header("Access-Control-Allow-Origin","*");
+    res.header("Access-Control-Allow-Methods", "GET,POST,HEAD,OPTIONS,PUT,PATCH,DELETE");
+    res.header("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
+    next();
+})
+
 
 passport.use('local', new localStrategy(function(username, password, done) {
     userModel.findOne({username: username}, function(error, user) {
@@ -71,7 +82,10 @@ passport.deserializeUser(function(user, done) {
 
 app.use(expressSession({
     secret: 'ProgramrendszerekFejleszteseKotelezoProgram2023Y0WB43',
-    resave: true}));
+    resave: true
+}));
+
+mongoose.set('strictQuery', true);
 
 
 
@@ -82,12 +96,7 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.use((req,res,next) => {
-    res.header("Access-Control-Allow-Origin","*");
-    res.header("Access-Control-Allow-Methods", "GET,POST,HEAD,OPTIONS,PUT,PATCH,DELETE");
-    res.header("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
-    next();
-})
+
 
 app.use('/', require('./routes'));
 

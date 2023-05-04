@@ -1,33 +1,59 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { RegistrationService } from 'src/app/service/registration.service';
-import {Router} from '@angular/router'
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css']
+    selector: 'app-registration',
+    templateUrl: './registration.component.html',
+    styleUrls: ['./registration.component.css'],
 })
 export class RegistrationComponent implements OnInit {
+    username: string;
+    password: string;
+    accessLevel: string;
 
-  username: string;
-  password: string;
+    constructor(
+        private registrationService: RegistrationService,
+        private formBuilder: FormBuilder,
+        private router: Router
+    ) {
+        this.username = '';
+        this.password = '';
+        this.accessLevel = '';
+    }
 
-  constructor(private registrationService: RegistrationService, private formBuilder: FormBuilder, private router: Router ) {
-    this.username = '';
-    this.password = '';
-   }
+    registrationFormGroup = this.formBuilder.group({
+        username: ['', [Validators.required]],
+        password: ['', [Validators.required]],
+    });
 
-   registrationFormGroup = this.formBuilder.group({
-    username: ['', [Validators.required]],
-    password: ['', [Validators.required]]
-   })
+    signUp() {
+        if (
+            this.registrationFormGroup.controls.username.value &&
+            this.registrationFormGroup.controls.password.value &&
+            this.registrationFormGroup.valid
+        ) {
+            if (this.username == 'admin') {
+                this.accessLevel = 'admin';
+            } else {
+                this.accessLevel = 'basic';
+            }
 
-   signUp() {
+            
+            this.registrationService
+                .signup(this.username, this.password)
+                .subscribe({
+                    next: (message) => {
+                        console.log('registration component signup: ', message);
+                        this.router.navigate(['/login']);
+                    },
+                    error: (error) => {
+                        console.log('registration component signup error: ', error);
+                    },
+                });
+        }
+    }
 
-   }
-
-  ngOnInit(): void {
-  }
-
+    ngOnInit(): void {}
 }

@@ -6,6 +6,7 @@ const passport = require('passport');
 const User = require("./database/models/user");
 const Bill = require('./database/models/bill');
 
+
 //List Users[x]
 router.route('/listUsers').get((req,res,next) => {
     User.find({})
@@ -99,8 +100,12 @@ router.route('/login').post((req,res,next) => {
 //Register[x]
 router.route('/registration').post((req,res,next) => {
     new User({
-        'username':req.body.username,
-        'password':req.body.password
+        /*
+        'username': req.body.username,
+        'password': req.body.password
+        */
+        username:req.body.username,
+        password:req.body.password
     })
     .save()
     .then((createUser) => res.send(createUser))

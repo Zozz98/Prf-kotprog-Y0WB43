@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
       this.loginFormGroup.valid) {
         this.loginService.login(this.username,this.password).subscribe({
           next:(message) => {
+            console.log('Belep a login componentbe')
             console.log("login component login: ", message)
             localStorage.setItem('user', this.username)
             this.router.navigate(['/home'])
@@ -42,7 +43,7 @@ export class LoginComponent implements OnInit {
     if(localStorage.getItem('user')) {
       localStorage.removeItem('user');
       this.loginService.logout().subscribe({
-        next:message => console.log('login component ngOnInit logout: ',message),
+        next: message => console.log('login component ngOnInit logout: ', message),
         error: error => console.log('login component ngOnInit logout error: ',error)
       })
     }

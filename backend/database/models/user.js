@@ -5,13 +5,11 @@ const UserSchema = new mongoose.Schema({
     username: {
         type: String,
         unique: true,
-        required: true,
-        minLength: 4
+        required: true
     },
     password: {
         type: String,
-        required: true,
-        minLength: 8
+        required: true
     },
     accessLevel: {
         type: String
