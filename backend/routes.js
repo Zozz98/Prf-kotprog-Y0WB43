@@ -119,20 +119,16 @@ router.route('/registration').post((req,res,next) => {
             'username': req.body.username,
             'password': req.body.password,
             'accessLevel':'admin'
-           
         })
     } else {
         new User({
-        
             'username': req.body.username,
             'password': req.body.password
-           
         })
         .save()
         .then((createUser) => res.send(createUser))
         .catch((error) => console.log('Error in registration ',error))
     }
-    
 })
 
 //Logout[x]
@@ -143,6 +139,5 @@ router.route('/logout').post((req, res, next) => {
     }else {
         return res.status(403).send('No signed user, so you cant logout')
     }
-    
 })
 module.exports = router;

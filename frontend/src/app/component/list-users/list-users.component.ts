@@ -14,12 +14,26 @@ export class ListUsersComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.fetchUsers();
+  }
+
+  fetchUsers() {
     this.userService.listusers().subscribe({
       next: data => {
         this.users = data,
         console.log('list users component ngOnInit: ', data)
       },
       error: error => console.log('list users component ngOnInit error: ',error)
+    })
+  }
+
+  deleteUser(id:string) {
+    this.userService.deleteuser(id).subscribe({
+      next: result => {
+        console.log('list bills component deleteUser: ',result)
+        this.fetchUsers();
+      },
+      error: error => console.log('list bills component deleteUser error: ',error)
     })
   }
 

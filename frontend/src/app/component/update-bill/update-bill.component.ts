@@ -30,7 +30,8 @@ export class UpdateBillComponent implements OnInit {
           comment:this.bill.comment,
           price: this.bill.price
         })
-      }
+      },
+      error: error => console.log('update bill ngOnInit error: ',error)
     })
   }
 

@@ -19,14 +19,21 @@ export class UserService {
         });
     }
 
-    updateuser(id: string) {
-      return this.http.put(this.serverUrl+'/updateUser/:id',
-      {},
-      {headers:this.headers,withCredentials:true,responseType:'text'})
+    updateuser(id: string, data:any) {
+      return this.http.put(this.serverUrl+`/updateUser/${id}`,data, {
+        headers:this.headers,
+        withCredentials:true,
+        })
     }
 
     deleteuser(id: string) {
-      return this.http.delete(this.serverUrl+'/deleteUser/:id'),
-      {headers:this.headers}
+      return this.http.delete(this.serverUrl+`/deleteBill/${id}`, {
+        headers:this.headers,
+        withCredentials:true
+      })
     }
+
+    getCurrentData(id: string) {
+      return this.http.get(this.serverUrl+`/updateUser/${id}`)
+  }
 }
