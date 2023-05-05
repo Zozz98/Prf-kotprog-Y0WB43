@@ -39,9 +39,10 @@ export class LoginComponent implements OnInit {
                 )
                 .subscribe({
                     next: (message) => {
-                        localStorage.setItem('user', this.loginFormGroup.controls.username.value!);
-                        this.router.navigate(['/']);
-                        console.log('login component login: ', message);
+                        this.router.navigate(['/'])
+                        localStorage.setItem('user', this.loginFormGroup.controls.username.value!)
+                        console.log('login component login: ', message)
+                        
                     },
                     error: (error) =>
                         console.log('login component login error: ', error),

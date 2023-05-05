@@ -13,8 +13,10 @@
             <td>{{bill.name}}</td>
             <td>{{bill.comment}}</td>
             <td>{{bill.price}}</td>
-            <a routerLink="/updateBill/{{bill._id}}" class="btn btn-outline">Edit</a>
-            <a class="btn btn-outline-danger">Delete</a>
+            <td>
+                <a routerLink="/updateBill/{{bill._id}}" class="btn btn-outline-secondary">Edit</a>
+                <a (click)="deleteBill(bill._id)" class="btn btn-outline-danger">Delete</a>
+            </td>
         </tr>
     </tbody>
 </div>

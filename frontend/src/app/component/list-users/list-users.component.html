@@ -12,8 +12,12 @@
             <td>{{user._id}}</td>
             <td>{{user.username}}</td>
             <td>{{user.password}}</td>
-            <td><a routerLink="/updateUser/{{user._id}}" class="btn btn-outline-secondary">Edit</a></td>
-            <td><a routerLink="/deleteUser/{{user._id}}" class="btn btn-outline-danger">Delete</a></td>
+            <td>
+                <a routerLink="/updateUser/{{user._id}}" class="btn btn-outline-secondary">Edit</a>
+                <a routerLink="/deleteUser/{{user._id}}" class="btn btn-outline-danger">Delete</a>
+            </td>
+           
         </tr>
     </tbody>
 </div>
+

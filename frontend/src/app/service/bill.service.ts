@@ -35,12 +35,22 @@ export class BillService {
         })
     }
 
-    updatebill(id:string) {
-
+    updatebill(id: string, data:any) {
+        return this.http.put(this.serverUrl+`/updateBill/${id}`, data, {
+            headers:this.headers,
+            withCredentials:true
+        })
     }
 
-    deletebill(id:string) {
-        
+    deletebill(id: string) {
+        return this.http.delete(this.serverUrl+`/deleteBill/${id}`, {
+            headers:this.headers,
+            withCredentials:true
+        })
+    }
+
+    getCurrentData(id: string) {
+        return this.http.get(this.serverUrl+`/updateBill/${id}`)
     }
 
     

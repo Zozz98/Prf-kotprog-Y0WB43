@@ -11,6 +11,7 @@ export class RegistrationService {
     constructor(private http: HttpClient) {}
 
     signup(username: string, password: string) {
+        
         return this.http.post(
             this.serverUrl + '/registration',
             { username:username, password:password },

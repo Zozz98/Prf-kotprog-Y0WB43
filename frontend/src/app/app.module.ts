@@ -18,6 +18,8 @@ import { ErrorComponent } from './component/error/error.component';
 import { CreateBillComponent } from './component/create-bill/create-bill.component';
 import { BillService } from './service/bill.service';
 import { UserService } from './service/user.service';
+import { UpdateBillComponent } from './component/update-bill/update-bill.component';
+import { UpdateUserComponent } from './component/update-user/update-user.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { UserService } from './service/user.service';
     ListUsersComponent,
     ListBillsComponent,
     ErrorComponent,
-    CreateBillComponent
+    CreateBillComponent,
+    UpdateBillComponent,
+    UpdateUserComponent
   ],
   imports: [
     BrowserModule,

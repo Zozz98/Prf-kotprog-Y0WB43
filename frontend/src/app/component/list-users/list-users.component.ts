@@ -9,7 +9,7 @@ import { UserService } from 'src/app/service/user.service';
 })
 export class ListUsersComponent implements OnInit {
   users: User[] = [];
-  tableHeaders = ['#','Username','Password'];
+  tableHeaders = ['#','Username','Password','Action'];
 
   constructor(private userService: UserService) { }
 

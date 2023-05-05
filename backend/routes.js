@@ -23,6 +23,15 @@ router.route('/updateUser/:id').put((req,res,next) => {
     .catch((error) => console.log('Error in updateUser ',error))
 })
 
+//Find the Updated User[x]
+router.route('/updateUser/:id').get((req,res,next)=> {
+    Bill.findById({_id:req.params.id}, {
+
+    })
+    .then((updateUser) => res.send(updateUser))
+    .catch((error) => console.log('Error in updateUser findById ',error))
+})
+
 //Delete Users[x]
 router.route('/deleteUser/:id').delete((req,res,next) => {
     User.findOneAndRemove({_id:req.params.id})
@@ -57,6 +66,14 @@ router.route('/updateBill/:id').put((req,res,next) => {
     .then((updateBill) => res.send(updateBill))
     .catch((error) => console.log('Error in updateBill ',error))
 })
+//Get the Updated Bill[x]
+router.route('/updateBill/:id').get((req,res,next)=> {
+    Bill.findById({_id:req.params.id}, {
+
+    })
+    .then((updateBill) => res.send(updateBill))
+    .catch((error) => console.log('Error in updateBill findById ',error))
+})
 
 //Delete Bills[x]
 router.route('/deleteBill/:id').delete((req,res,next) => {
@@ -85,17 +102,37 @@ router.route('/login').post((req,res,next) => {
     }
 })
 
+router.route('/currentUser').get((req,res,next) =>{
+    const user = req.user;
+    if(user) {
+        res.status(200).send(user);
+    }else {
+        res.status(404).send("User is not logged in")
+    }
+})
+
 //Register[x]
 router.route('/registration').post((req,res,next) => {
-    new User({
+    if(req.body.username === 'admin') {
+        new User({
         
-        'username': req.body.username,
-        'password': req.body.password
-       
-    })
-    .save()
-    .then((createUser) => res.send(createUser))
-    .catch((error) => console.log('Error in registration ',error))
+            'username': req.body.username,
+            'password': req.body.password,
+            'accessLevel':'admin'
+           
+        })
+    } else {
+        new User({
+        
+            'username': req.body.username,
+            'password': req.body.password
+           
+        })
+        .save()
+        .then((createUser) => res.send(createUser))
+        .catch((error) => console.log('Error in registration ',error))
+    }
+    
 })
 
 //Logout[x]
