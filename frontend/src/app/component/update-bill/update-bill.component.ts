@@ -22,7 +22,6 @@ export class UpdateBillComponent implements OnInit {
 
   ngOnInit(): void {
     this.billService.getCurrentData(this.activatedRoute.snapshot.params['id']).subscribe({
-      
       next:(result) => {
         this.bill = result
         this.editBillFormGroup.patchValue({

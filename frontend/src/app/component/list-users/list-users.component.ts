@@ -28,9 +28,10 @@ export class ListUsersComponent implements OnInit {
   }
 
   deleteUser(id:string) {
+    console.log(this.users)
     this.userService.deleteuser(id).subscribe({
       next: result => {
-        console.log('list bills component deleteUser: ',result)
+        console.log('list users component deleteUser: ',result);
         this.fetchUsers();
       },
       error: error => console.log('list bills component deleteUser error: ',error)

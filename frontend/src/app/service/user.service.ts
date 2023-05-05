@@ -27,7 +27,7 @@ export class UserService {
     }
 
     deleteuser(id: string) {
-      return this.http.delete(this.serverUrl+`/deleteBill/${id}`, {
+      return this.http.delete(this.serverUrl+`/deleteUser/${id}`, {
         headers:this.headers,
         withCredentials:true
       })

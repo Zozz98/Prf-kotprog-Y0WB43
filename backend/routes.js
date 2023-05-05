@@ -23,9 +23,9 @@ router.route('/updateUser/:id').put((req,res,next) => {
     .catch((error) => console.log('Error in updateUser ',error))
 })
 
-//Find the Updated User[x]
+//Get the Updated User[x]
 router.route('/updateUser/:id').get((req,res,next)=> {
-    Bill.findById({_id:req.params.id}, {
+    User.findById({_id:req.params.id}, {
 
     })
     .then((updateUser) => res.send(updateUser))
